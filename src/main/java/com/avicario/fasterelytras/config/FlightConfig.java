@@ -5,8 +5,8 @@ public class FlightConfig {
 
     // Valores por defecto
     private boolean altitudeDeterminesSpeed = true;
-    private double minSpeed = 7.2;
-    private double maxSpeed = 150.0;
+    private double minSpeed = 35.0;
+    private double maxSpeed = 38.0;
     private double minHeight = 0.0;
     private double maxHeight = 256.0;
 
