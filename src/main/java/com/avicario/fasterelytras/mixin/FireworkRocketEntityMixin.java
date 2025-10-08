@@ -1,7 +1,7 @@
 package com.avicario.fasterelytras.mixin;
 
 import com.avicario.fasterelytras.config.FlightConfig;
-import com.avicario.fasterelytras.utility.EanMath;
+import com.avicario.fasterelytras.utility.MathUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.util.math.MathHelper;
@@ -9,6 +9,7 @@ import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
@@ -18,6 +19,7 @@ public class FireworkRocketEntityMixin {
     @Shadow
     private @Nullable LivingEntity shooter;
 
+    @Unique
     private FlightConfig configInstance = FlightConfig.getOrCreateInstance();
 
     @ModifyArg(
@@ -29,32 +31,38 @@ public class FireworkRocketEntityMixin {
             )
     )
     private Vec3d modifyRocketBoostVelocity(Vec3d originalVelocity) {
-        if (configInstance.isAltitudeDeterminesSpeed() && shooter != null) {
-            // Obtener valores de movimiento y posición del jugador
-            Vec3d positionVector = shooter.getPos();
+        if (shooter != null && shooter.isGliding()) {
             Vec3d shooterRotation = shooter.getRotationVector();
             Vec3d shooterVelocity = shooter.getVelocity();
-            double shooterAltitude = positionVector.y;
 
-            // Leer valores de configuración
-            double minSpeed = configInstance.getMinSpeed();
-            double maxSpeed = configInstance.getMaxSpeed();
-            double curveStart = configInstance.getMinHeight();
-            double curveEnd = configInstance.getMaxHeight();
+            double speedMultiplier;
 
-            // Calcular velocidad basada en altitud
-            double altitudeCalculatedSpeed = MathHelper.clamp(
-                    EanMath.getLinealValue(curveStart, minSpeed, curveEnd, maxSpeed, shooterAltitude),
-                    minSpeed,
-                    maxSpeed
-            );
+            if (configInstance.isAltitudeDeterminesSpeed()) {
+                Vec3d positionVector = shooter.getPos();
+                double shooterAltitude = positionVector.y;
 
-            // Ecuación que determina el multiplicador de velocidad
-            double speedMultiplier = 0.0000006453840919839 * Math.pow(altitudeCalculatedSpeed, 2) +
-                    0.0508467 * altitudeCalculatedSpeed -
-                    0.202377;
+                double minSpeed = configInstance.getMinSpeed();
+                double maxSpeed = configInstance.getMaxSpeed();
+                double curveStart = configInstance.getMinHeight();
+                double curveEnd = configInstance.getMaxHeight();
 
-            // Aplicar velocidad adicional al movimiento del jugador
+                double altitudeCalculatedSpeed = MathHelper.clamp(
+                        MathUtil.getLinealValue(curveStart, minSpeed, curveEnd, maxSpeed, shooterAltitude),
+                        minSpeed,
+                        maxSpeed
+                );
+
+                speedMultiplier = 0.0000006453840919839 * Math.pow(altitudeCalculatedSpeed, 2) +
+                        0.0508467 * altitudeCalculatedSpeed -
+                        0.202377;
+            } else {
+                double fixedSpeed = configInstance.getMaxSpeed();
+
+                speedMultiplier = 0.0000006453840919839 * Math.pow(fixedSpeed, 2) +
+                        0.0508467 * fixedSpeed -
+                        0.202377;
+            }
+
             return shooterVelocity.add(
                     shooterRotation.x * 0.1 + (shooterRotation.x * speedMultiplier - shooterVelocity.x) * 0.5,
                     shooterRotation.y * 0.1 + (shooterRotation.y * speedMultiplier - shooterVelocity.y) * 0.5,

@@ -49,6 +49,9 @@ public class FasterelytrasClient implements ClientModInitializer {
         Vec3d velocity = client.player.getVelocity();
 
         if (enableVertical) {
+            if (client.player.isOnGround()){
+                return Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z) * 20.0;
+            }
             return velocity.length() * 20.0;
         }
         else {

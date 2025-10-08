@@ -1,6 +1,6 @@
 package com.avicario.fasterelytras.utility;
 
-public class EanMath {
+public class MathUtil {
     /**
      * Calcula un valor lineal interpolado entre dos puntos
      */
