@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "FasterElytras",
   "description": "",
-  "authors": [],
+  "authors": ["avicario"],
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/fasterelytras/icon.png",
@@ -18,6 +18,9 @@
     ],
     "main": [
       "com.avicario.fasterelytras.FasterElytras"
+    ],
+    "modmenu": [
+      "com.avicario.fasterelytras.client.ConfigScreen"
     ]
   },
   "mixins": [
@@ -31,5 +34,8 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "modmenu": ">=15.0.0"
   }
 }

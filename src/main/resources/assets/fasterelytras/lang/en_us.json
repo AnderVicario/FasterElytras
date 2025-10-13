@@ -1,0 +1,14 @@
+{
+  "title.fasterelytras.config": "Faster Elytras Configuration",
+  "category.fasterelytras.settings": "Settings",
+  "option.fasterelytras.altitude_determines_speed": "Altitude Determines Speed",
+  "tooltip.fasterelytras.altitude_determines_speed": "If enabled, flight speed will vary with altitude",
+  "option.fasterelytras.min_speed": "Minimum Speed",
+  "tooltip.fasterelytras.min_speed": "Minimum flight speed at lowest altitude",
+  "option.fasterelytras.max_speed": "Maximum Speed",
+  "tooltip.fasterelytras.max_speed": "Maximum flight speed at highest altitude",
+  "option.fasterelytras.min_height": "Minimum Height",
+  "tooltip.fasterelytras.min_height": "Lowest altitude for speed calculation",
+  "option.fasterelytras.max_height": "Maximum Height",
+  "tooltip.fasterelytras.max_height": "Highest altitude for speed calculation"
+}
