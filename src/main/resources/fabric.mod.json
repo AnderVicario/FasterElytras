@@ -17,7 +17,7 @@
       "com.avicario.fasterelytras.client.FasterelytrasClient"
     ],
     "main": [
-      "com.avicario.fasterelytras.Fasterelytras"
+      "com.avicario.fasterelytras.FasterElytras"
     ]
   },
   "mixins": [

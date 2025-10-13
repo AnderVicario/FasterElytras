@@ -5,8 +5,8 @@ public class FlightConfig {
 
     // Valores por defecto
     private boolean altitudeDeterminesSpeed = true;
-    private double minSpeed = 35.0;
-    private double maxSpeed = 38.0;
+    private double minSpeed = 36.0;
+    private double maxSpeed = 39.0;
     private double minHeight = 0.0;
     private double maxHeight = 256.0;
 
@@ -15,6 +15,14 @@ public class FlightConfig {
             instance = new FlightConfig();
         }
         return instance;
+    }
+
+    public void resetToDefaults() {
+        this.altitudeDeterminesSpeed = true;
+        this.minSpeed = 36.0;
+        this.maxSpeed = 39.0;
+        this.minHeight = 0.0;
+        this.maxHeight = 256.0;
     }
 
     // Getters y Setters
@@ -32,4 +40,16 @@ public class FlightConfig {
 
     public double getMaxHeight() { return maxHeight; }
     public void setMaxHeight(double maxHeight) { this.maxHeight = maxHeight; }
+
+    public String getCurrentConfig() {
+        return String.format(
+                "Actual Configuration:\n" +
+                        "• Altitude Determines Speed: %s\n" +
+                        "• Min Speed: %.1f\n" +
+                        "• Max Speed: %.1f\n" +
+                        "• Min Height: %.1f\n" +
+                        "• Max Height: %.1f",
+                altitudeDeterminesSpeed, minSpeed, maxSpeed, minHeight, maxHeight
+        );
+    }
 }
