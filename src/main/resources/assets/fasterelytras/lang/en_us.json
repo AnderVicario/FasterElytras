@@ -11,6 +11,10 @@
   "tooltip.fasterelytras.min_height": "Lowest altitude for speed calculation",
   "option.fasterelytras.max_height": "Maximum Height",
   "tooltip.fasterelytras.max_height": "Highest altitude for speed calculation",
+  "option.fasterelytras.show_speedometer": "Show Speedometer",
+  "tooltip.fasterelytras.show_speedometer": "Display speed information on screen",
+  "option.fasterelytras.enable_vertical": "Enable Vertical Speed Calculation",
+  "tooltip.fasterelytras.enable_vertical": "Include vertical movement in speed calculation",
 
   "hud.fasterelytras.speed": "Speed: %.2f m/s",
 
@@ -20,10 +24,14 @@
   "command.fasterelytras.config.max_speed": "• Max Speed: %.1f",
   "command.fasterelytras.config.min_height": "• Min Height: %.1f",
   "command.fasterelytras.config.max_height": "• Max Height: %.1f",
+  "command.fasterelytras.config.show_speedometer": "• Show Speedometer: %s",
+  "command.fasterelytras.config.enable_vertical": "• Enable Vertical: %s",
   "command.fasterelytras.set.altitude_determines_speed": "Altitude Determines Speed set to: %s",
   "command.fasterelytras.set.min_speed": "Min Speed set to: %.1f",
   "command.fasterelytras.set.max_speed": "Max Speed set to: %.1f",
   "command.fasterelytras.set.min_height": "Min Height set to: %.1f",
   "command.fasterelytras.set.max_height": "Max Height set to: %.1f",
+  "command.fasterelytras.set.show_speedometer": "Show Speedometer set to: %s",
+  "command.fasterelytras.set.enable_vertical": "Enable Vertical set to: %s",
   "command.fasterelytras.reset": "Configuration reset to default values"
 }

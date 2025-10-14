@@ -1,5 +1,6 @@
 package com.avicario.fasterelytras.client;
 
+import com.avicario.fasterelytras.config.FlightConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.client.MinecraftClient;
@@ -20,15 +21,14 @@ public class FasterelytrasClient implements ClientModInitializer {
                 Identifier.of("fasterelytras", "hud_text"),
                 (context, tickCounter) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
+                    FlightConfig config = FlightConfig.getOrCreateInstance();
 
-                    if (client.player != null) {
-                        // Calcular velocidad actual del jugador
-                        double currentSpeed = calculatePlayerSpeed(client, true);
-
-                        // Actualizar la velocidad media cada 20 ticks
+                    // Solo mostrar si está activado en la configuración
+                    if (client.player != null && config.isShowSpeedometer()) {
+                        // Usar la configuración enableVertical
+                        double currentSpeed = calculatePlayerSpeed(client, config.isEnableVertical());
                         updateAverageSpeed(currentSpeed);
 
-                        // Mostrar la velocidad media
                         String formattedSpeed = String.format("%.2f", averageSpeed);
                         String speedText = String.format(
                                 Text.translatable("hud.fasterelytras.speed").getString(),

@@ -13,6 +13,11 @@ public class FlightConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Path CONFIG_FILE = FabricLoader.getInstance().getConfigDir().resolve("fasterelytras.json");
 
+    // Cliente
+    private boolean showSpeedometer = false;
+    private boolean enableVertical = false;
+
+
     // Valores por defecto
     private boolean altitudeDeterminesSpeed = true;
     private double minSpeed = 36.0;
@@ -54,10 +59,24 @@ public class FlightConfig {
         this.maxSpeed = 39.0;
         this.minHeight = 0.0;
         this.maxHeight = 256.0;
+        this.showSpeedometer = false;
+        this.enableVertical = false;
         save();
     }
 
     // Getters y Setters (actualizados para guardar automáticamente)
+    public boolean isShowSpeedometer() { return showSpeedometer; }
+    public void setShowSpeedometer(boolean showSpeedometer) {
+        this.showSpeedometer = showSpeedometer;
+        save();
+    }
+
+    public boolean isEnableVertical() { return enableVertical; }
+    public void setEnableVertical(boolean enableVertical) {
+        this.enableVertical = enableVertical;
+        save();
+    }
+
     public boolean isAltitudeDeterminesSpeed() { return altitudeDeterminesSpeed; }
     public void setAltitudeDeterminesSpeed(boolean altitudeDeterminesSpeed) {
         this.altitudeDeterminesSpeed = altitudeDeterminesSpeed;

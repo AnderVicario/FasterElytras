@@ -28,6 +28,20 @@ public class ConfigScreen implements ModMenuApi {
 
         ConfigCategory settings = builder.getOrCreateCategory(Text.translatable("category.fasterelytras.settings"));
 
+        // Show Speedometer
+        settings.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.fasterelytras.show_speedometer"), config.isShowSpeedometer())
+                .setDefaultValue(false)
+                .setTooltip(Text.translatable("tooltip.fasterelytras.show_speedometer"))
+                .setSaveConsumer(config::setShowSpeedometer)
+                .build());
+
+        // Enable Vertical
+        settings.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.fasterelytras.enable_vertical"), config.isEnableVertical())
+                .setDefaultValue(false)
+                .setTooltip(Text.translatable("tooltip.fasterelytras.enable_vertical"))
+                .setSaveConsumer(config::setEnableVertical)
+                .build());
+
         // Altitude Determines Speed
         settings.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.fasterelytras.altitude_determines_speed"), config.isAltitudeDeterminesSpeed())
                 .setDefaultValue(true)
@@ -38,8 +52,8 @@ public class ConfigScreen implements ModMenuApi {
         // Min Speed
         settings.addEntry(entryBuilder.startDoubleField(Text.translatable("option.fasterelytras.min_speed"), config.getMinSpeed())
                 .setDefaultValue(36.0)
-                .setMin(0.0)
-                .setMax(100.0)
+//                .setMin(0.0)
+//                .setMax(1000.0)
                 .setTooltip(Text.translatable("tooltip.fasterelytras.min_speed"))
                 .setSaveConsumer(config::setMinSpeed)
                 .build());
@@ -47,8 +61,8 @@ public class ConfigScreen implements ModMenuApi {
         // Max Speed
         settings.addEntry(entryBuilder.startDoubleField(Text.translatable("option.fasterelytras.max_speed"), config.getMaxSpeed())
                 .setDefaultValue(39.0)
-                .setMin(0.0)
-                .setMax(100.0)
+//                .setMin(0.0)
+//                .setMax(1000.0)
                 .setTooltip(Text.translatable("tooltip.fasterelytras.max_speed"))
                 .setSaveConsumer(config::setMaxSpeed)
                 .build());
@@ -56,8 +70,8 @@ public class ConfigScreen implements ModMenuApi {
         // Min Height
         settings.addEntry(entryBuilder.startDoubleField(Text.translatable("option.fasterelytras.min_height"), config.getMinHeight())
                 .setDefaultValue(0.0)
-                .setMin(-64.0)
-                .setMax(320.0)
+//                .setMin(-64.0)
+//                .setMax(320.0)
                 .setTooltip(Text.translatable("tooltip.fasterelytras.min_height"))
                 .setSaveConsumer(config::setMinHeight)
                 .build());
@@ -65,8 +79,8 @@ public class ConfigScreen implements ModMenuApi {
         // Max Height
         settings.addEntry(entryBuilder.startDoubleField(Text.translatable("option.fasterelytras.max_height"), config.getMaxHeight())
                 .setDefaultValue(256.0)
-                .setMin(-64.0)
-                .setMax(320.0)
+//                .setMin(-64.0)
+//                .setMax(320.0)
                 .setTooltip(Text.translatable("tooltip.fasterelytras.max_height"))
                 .setSaveConsumer(config::setMaxHeight)
                 .build());
