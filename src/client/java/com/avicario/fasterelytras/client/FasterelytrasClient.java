@@ -29,7 +29,11 @@ public class FasterelytrasClient implements ClientModInitializer {
                         updateAverageSpeed(currentSpeed);
 
                         // Mostrar la velocidad media
-                        String speedText = String.format("Velocidad: %.2f m/s", averageSpeed);
+                        String formattedSpeed = String.format("%.2f", averageSpeed);
+                        String speedText = String.format(
+                                Text.translatable("hud.fasterelytras.speed").getString(),
+                                formattedSpeed
+                        );
                         context.drawText(
                                 client.textRenderer,
                                 Text.literal(speedText),

@@ -10,5 +10,20 @@
   "option.fasterelytras.min_height": "Minimum Height",
   "tooltip.fasterelytras.min_height": "Lowest altitude for speed calculation",
   "option.fasterelytras.max_height": "Maximum Height",
-  "tooltip.fasterelytras.max_height": "Highest altitude for speed calculation"
+  "tooltip.fasterelytras.max_height": "Highest altitude for speed calculation",
+
+  "hud.fasterelytras.speed": "Speed: %.2f m/s",
+
+  "command.fasterelytras.config.current": "Current Configuration:",
+  "command.fasterelytras.config.altitude_determines_speed": "• Altitude Determines Speed: %s",
+  "command.fasterelytras.config.min_speed": "• Min Speed: %.1f",
+  "command.fasterelytras.config.max_speed": "• Max Speed: %.1f",
+  "command.fasterelytras.config.min_height": "• Min Height: %.1f",
+  "command.fasterelytras.config.max_height": "• Max Height: %.1f",
+  "command.fasterelytras.set.altitude_determines_speed": "Altitude Determines Speed set to: %s",
+  "command.fasterelytras.set.min_speed": "Min Speed set to: %.1f",
+  "command.fasterelytras.set.max_speed": "Max Speed set to: %.1f",
+  "command.fasterelytras.set.min_height": "Min Height set to: %.1f",
+  "command.fasterelytras.set.max_height": "Max Height set to: %.1f",
+  "command.fasterelytras.reset": "Configuration reset to default values"
 }

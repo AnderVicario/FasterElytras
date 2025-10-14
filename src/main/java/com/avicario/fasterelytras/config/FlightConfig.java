@@ -87,16 +87,4 @@ public class FlightConfig {
         this.maxHeight = maxHeight;
         save();
     }
-
-    public String getCurrentConfig() {
-        return String.format(
-                "Configuración actual:\n" +
-                        "• Altitude Determines Speed: %s\n" +
-                        "• Min Speed: %.1f\n" +
-                        "• Max Speed: %.1f\n" +
-                        "• Min Height: %.1f\n" +
-                        "• Max Height: %.1f",
-                altitudeDeterminesSpeed, minSpeed, maxSpeed, minHeight, maxHeight
-        );
-    }
 }

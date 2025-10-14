@@ -44,49 +44,81 @@ public class FlightConfigCommand {
 
     private static int showConfig(CommandContext<ServerCommandSource> context) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
-        context.getSource().sendFeedback(() -> Text.literal(config.getCurrentConfig()), true);
+
+        Text configText = Text.literal("")
+                .append(Text.translatable("command.fasterelytras.config.current"))
+                .append("\n")
+                .append(Text.translatable("command.fasterelytras.config.altitude_determines_speed", config.isAltitudeDeterminesSpeed()))
+                .append("\n")
+                .append(Text.translatable("command.fasterelytras.config.min_speed", config.getMinSpeed()))
+                .append("\n")
+                .append(Text.translatable("command.fasterelytras.config.max_speed", config.getMaxSpeed()))
+                .append("\n")
+                .append(Text.translatable("command.fasterelytras.config.min_height", config.getMinHeight()))
+                .append("\n")
+                .append(Text.translatable("command.fasterelytras.config.max_height", config.getMaxHeight()));
+
+        context.getSource().sendFeedback(() -> configText, true);
         return Command.SINGLE_SUCCESS;
     }
 
     private static int setAltitudeDeterminesSpeed(CommandContext<ServerCommandSource> context, boolean value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setAltitudeDeterminesSpeed(value);
-        context.getSource().sendFeedback(() -> Text.literal("§aAltitude Determines Speed establecido a: " + value), true);
+        context.getSource().sendFeedback(() ->
+                        Text.translatable("command.fasterelytras.set.altitude_determines_speed", value),
+                true
+        );
         return Command.SINGLE_SUCCESS;
     }
 
     private static int setMinSpeed(CommandContext<ServerCommandSource> context, double value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setMinSpeed(value);
-        context.getSource().sendFeedback(() -> Text.literal("§aMin Speed establecido a: " + value), true);
+        context.getSource().sendFeedback(() ->
+                        Text.translatable("command.fasterelytras.set.min_speed", value),
+                true
+        );
         return Command.SINGLE_SUCCESS;
     }
 
     private static int setMaxSpeed(CommandContext<ServerCommandSource> context, double value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setMaxSpeed(value);
-        context.getSource().sendFeedback(() -> Text.literal("§aMax Speed establecido a: " + value), true);
+        context.getSource().sendFeedback(() ->
+                        Text.translatable("command.fasterelytras.set.max_speed", value),
+                true
+        );
         return Command.SINGLE_SUCCESS;
     }
 
     private static int setMinHeight(CommandContext<ServerCommandSource> context, double value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setMinHeight(value);
-        context.getSource().sendFeedback(() -> Text.literal("§aMin Height establecido a: " + value), true);
+        context.getSource().sendFeedback(() ->
+                        Text.translatable("command.fasterelytras.set.min_height", value),
+                true
+        );
         return Command.SINGLE_SUCCESS;
     }
 
     private static int setMaxHeight(CommandContext<ServerCommandSource> context, double value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setMaxHeight(value);
-        context.getSource().sendFeedback(() -> Text.literal("§aMax Height establecido a: " + value), true);
+        context.getSource().sendFeedback(() ->
+                        Text.translatable("command.fasterelytras.set.max_height", value),
+                true
+        );
         return Command.SINGLE_SUCCESS;
     }
 
     private static int resetConfig(CommandContext<ServerCommandSource> context) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.resetToDefaults();
-        context.getSource().sendFeedback(() -> Text.literal("§aConfiguración restablecida a valores por defecto"), true);
+        context.getSource().sendFeedback(() ->
+                        Text.translatable("command.fasterelytras.reset"),
+                true
+        );
         return Command.SINGLE_SUCCESS;
     }
 }
