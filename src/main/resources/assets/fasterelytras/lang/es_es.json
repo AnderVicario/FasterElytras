@@ -1,0 +1,29 @@
+{
+  "title.fasterelytras.config": "Configuración de elytras rápidas",
+  "category.fasterelytras.settings": "Ajustes",
+  "option.fasterelytras.altitude_determines_speed": "La altitud determina la velocidad",
+  "tooltip.fasterelytras.altitude_determines_speed": "Si está activado, la velocidad de vuelo variará según la altitud",
+  "option.fasterelytras.min_speed": "Velocidad mínima",
+  "tooltip.fasterelytras.min_speed": "Velocidad mínima de vuelo a la altitud más baja",
+  "option.fasterelytras.max_speed": "Velocidad máxima",
+  "tooltip.fasterelytras.max_speed": "Velocidad máxima de vuelo a la altitud más alta",
+  "option.fasterelytras.min_height": "Altura mínima",
+  "tooltip.fasterelytras.min_height": "Altitud más baja para el cálculo de la velocidad",
+  "option.fasterelytras.max_height": "Altura máxima",
+  "tooltip.fasterelytras.max_height": "Altitud más alta para el cálculo de la velocidad",
+
+  "hud.fasterelytras.speed": "Velocidad: %.2f m/s",
+
+  "command.fasterelytras.config.current": "Configuración actual:",
+  "command.fasterelytras.config.altitude_determines_speed": "• La altitud determina la velocidad: %s",
+  "command.fasterelytras.config.min_speed": "• Velocidad mínima: %.1f",
+  "command.fasterelytras.config.max_speed": "• Velocidad máxima: %.1f",
+  "command.fasterelytras.config.min_height": "• Altura mínima: %.1f",
+  "command.fasterelytras.config.max_height": "• Altura máxima: %.1f",
+  "command.fasterelytras.set.altitude_determines_speed": "La altitud determina la velocidad establecida en: %s",
+  "command.fasterelytras.set.min_speed": "Velocidad mínima establecida en: %.1f",
+  "command.fasterelytras.set.max_speed": "Velocidad máxima establecida en: %.1f",
+  "command.fasterelytras.set.min_height": "Altura mínima establecida en: %.1f",
+  "command.fasterelytras.set.max_height": "Altura máxima establecida en: %.1f",
+  "command.fasterelytras.reset": "Configuración restablecida a los valores predeterminados"
+}

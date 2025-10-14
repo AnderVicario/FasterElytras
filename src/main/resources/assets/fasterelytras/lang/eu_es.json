@@ -1,0 +1,29 @@
+{
+  "title.fasterelytras.config": "Elytra azkarren konfigurazioa",
+  "category.fasterelytras.settings": "Ezarpenak",
+  "option.fasterelytras.altitude_determines_speed": "Altuera abiadura zehazten du",
+  "tooltip.fasterelytras.altitude_determines_speed": "Aktibatuta badago, hegaldiko abiadura altueraren arabera aldatuko da",
+  "option.fasterelytras.min_speed": "Gutxieneko abiadura",
+  "tooltip.fasterelytras.min_speed": "Hegaldiko gutxieneko abiadura altuera baxuenean",
+  "option.fasterelytras.max_speed": "Gehieneko abiadura",
+  "tooltip.fasterelytras.max_speed": "Hegaldiko gehieneko abiadura altuera altuenean",
+  "option.fasterelytras.min_height": "Gutxieneko altuera",
+  "tooltip.fasterelytras.min_height": "Abiadura kalkulatzeko altuera baxuena",
+  "option.fasterelytras.max_height": "Gehieneko altuera",
+  "tooltip.fasterelytras.max_height": "Abiadura kalkulatzeko altuera altuena",
+
+  "hud.fasterelytras.speed": "Abiadura: %.2f m/s",
+
+  "command.fasterelytras.config.current": "Uneko konfigurazioa:",
+  "command.fasterelytras.config.altitude_determines_speed": "• Altuera abiadura zehazten du: %s",
+  "command.fasterelytras.config.min_speed": "• Gutxieneko abiadura: %.1f",
+  "command.fasterelytras.config.max_speed": "• Gehieneko abiadura: %.1f",
+  "command.fasterelytras.config.min_height": "• Gutxieneko altuera: %.1f",
+  "command.fasterelytras.config.max_height": "• Gehieneko altuera: %.1f",
+  "command.fasterelytras.set.altitude_determines_speed": "Altuera abiadura zehazten du ezarrita: %s",
+  "command.fasterelytras.set.min_speed": "Gutxieneko abiadura ezarrita: %.1f",
+  "command.fasterelytras.set.max_speed": "Gehieneko abiadura ezarrita: %.1f",
+  "command.fasterelytras.set.min_height": "Gutxieneko altuera ezarrita: %.1f",
+  "command.fasterelytras.set.max_height": "Gehieneko altuera ezarrita: %.1f",
+  "command.fasterelytras.reset": "Konfigurazioa lehenetsitako balioetara berrezarri da"
+}
