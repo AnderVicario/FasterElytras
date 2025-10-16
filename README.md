@@ -2,7 +2,7 @@ FasterElytras
 =============
 
 FasterElytras is a Minecraft Fabric mod that enhances elytra flight mechanics 
-with customizable speed control. The mod allows players to configure rocket flight 
+with customizable speed control (by default a bit faster than vanilla). The mod allows players to configure rocket flight 
 speed based on altitude or set fixed speeds, providing a more dynamic and 
 personalized flying experience.
 
