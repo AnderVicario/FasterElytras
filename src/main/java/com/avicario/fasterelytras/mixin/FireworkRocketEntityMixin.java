@@ -38,7 +38,7 @@ public class FireworkRocketEntityMixin {
             double speedMultiplier;
 
             if (configInstance.isAltitudeDeterminesSpeed()) {
-                Vec3d positionVector = shooter.getPos();
+                Vec3d positionVector = shooter.getEntityPos();
                 double shooterAltitude = positionVector.y;
 
                 double minSpeed = configInstance.getMinSpeed();
