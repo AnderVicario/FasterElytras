@@ -6,9 +6,13 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.server.PlayerManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.command.permission.PermissionLevel;
 
+import static net.minecraft.command.permission.PermissionLevel.GAMEMASTERS;
 import static net.minecraft.server.command.CommandManager.*;
 
 public class FlightConfigCommand {
@@ -16,7 +20,19 @@ public class FlightConfigCommand {
     public static void register() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             dispatcher.register(literal("fasterelytras")
-                    .requires(source -> source.hasPermissionLevel(2)) // Solo ops pueden usar estos comandos
+                    .requires(source -> {
+                        // 1. Permite la consola (útil para scripts)
+                        if (!source.isExecutedByPlayer()) {
+                            return true; // O source.hasPermissionLevel(4) para restringir
+                        }
+
+                        // 2. Para jugadores, verificar si es operador nivel 2+
+                        ServerPlayerEntity player = source.getPlayer();
+                        if (player == null) return false;
+
+                        PlayerManager pm = source.getServer().getPlayerManager();
+                        return pm.isOperator(player.getPlayerConfigEntry());
+                    }) // Solo ops pueden usar estos comandos
                     .then(literal("config")
                             .then(literal("show")
                                     .executes(FlightConfigCommand::showConfig))

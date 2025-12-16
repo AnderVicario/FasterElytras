@@ -36,6 +36,6 @@
     "minecraft": "${minecraft_version}"
   },
   "suggests": {
-    "modmenu": ">=15.0.0"
+    "modmenu": ">=17.0.0"
   }
 }
