@@ -10,10 +10,9 @@ import net.minecraft.server.PlayerManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.command.permission.PermissionLevel;
 
-import static net.minecraft.command.permission.PermissionLevel.GAMEMASTERS;
-import static net.minecraft.server.command.CommandManager.*;
+import static net.minecraft.server.command.CommandManager.argument;
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class FlightConfigCommand {
 
