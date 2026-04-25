@@ -6,8 +6,8 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
 public class ConfigScreen implements ModMenuApi {
 
@@ -21,67 +21,67 @@ public class ConfigScreen implements ModMenuApi {
 
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(Text.translatable("title.fasterelytras.config"))
+                .setTitle(Component.translatable("title.fasterelytras.config"))
                 .setSavingRunnable(config::save);
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        ConfigCategory settings = builder.getOrCreateCategory(Text.translatable("category.fasterelytras.settings"));
+        ConfigCategory settings = builder.getOrCreateCategory(Component.translatable("category.fasterelytras.settings"));
 
         // Show Speedometer
-        settings.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.fasterelytras.show_speedometer"), config.isShowSpeedometer())
+        settings.addEntry(entryBuilder.startBooleanToggle(Component.translatable("option.fasterelytras.show_speedometer"), config.isShowSpeedometer())
                 .setDefaultValue(false)
-                .setTooltip(Text.translatable("tooltip.fasterelytras.show_speedometer"))
+                .setTooltip(Component.translatable("tooltip.fasterelytras.show_speedometer"))
                 .setSaveConsumer(config::setShowSpeedometer)
                 .build());
 
         // Enable Vertical
-        settings.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.fasterelytras.enable_vertical"), config.isEnableVertical())
+        settings.addEntry(entryBuilder.startBooleanToggle(Component.translatable("option.fasterelytras.enable_vertical"), config.isEnableVertical())
                 .setDefaultValue(false)
-                .setTooltip(Text.translatable("tooltip.fasterelytras.enable_vertical"))
+                .setTooltip(Component.translatable("tooltip.fasterelytras.enable_vertical"))
                 .setSaveConsumer(config::setEnableVertical)
                 .build());
 
         // Altitude Determines Speed
-        settings.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.fasterelytras.altitude_determines_speed"), config.isAltitudeDeterminesSpeed())
+        settings.addEntry(entryBuilder.startBooleanToggle(Component.translatable("option.fasterelytras.altitude_determines_speed"), config.isAltitudeDeterminesSpeed())
                 .setDefaultValue(true)
-                .setTooltip(Text.translatable("tooltip.fasterelytras.altitude_determines_speed"))
+                .setTooltip(Component.translatable("tooltip.fasterelytras.altitude_determines_speed"))
                 .setSaveConsumer(config::setAltitudeDeterminesSpeed)
                 .build());
 
         // Min Speed
-        settings.addEntry(entryBuilder.startDoubleField(Text.translatable("option.fasterelytras.min_speed"), config.getMinSpeed())
+        settings.addEntry(entryBuilder.startDoubleField(Component.translatable("option.fasterelytras.min_speed"), config.getMinSpeed())
                 .setDefaultValue(36.0)
 //                .setMin(0.0)
 //                .setMax(1000.0)
-                .setTooltip(Text.translatable("tooltip.fasterelytras.min_speed"))
+                .setTooltip(Component.translatable("tooltip.fasterelytras.min_speed"))
                 .setSaveConsumer(config::setMinSpeed)
                 .build());
 
         // Max Speed
-        settings.addEntry(entryBuilder.startDoubleField(Text.translatable("option.fasterelytras.max_speed"), config.getMaxSpeed())
+        settings.addEntry(entryBuilder.startDoubleField(Component.translatable("option.fasterelytras.max_speed"), config.getMaxSpeed())
                 .setDefaultValue(39.0)
 //                .setMin(0.0)
 //                .setMax(1000.0)
-                .setTooltip(Text.translatable("tooltip.fasterelytras.max_speed"))
+                .setTooltip(Component.translatable("tooltip.fasterelytras.max_speed"))
                 .setSaveConsumer(config::setMaxSpeed)
                 .build());
 
         // Min Height
-        settings.addEntry(entryBuilder.startDoubleField(Text.translatable("option.fasterelytras.min_height"), config.getMinHeight())
+        settings.addEntry(entryBuilder.startDoubleField(Component.translatable("option.fasterelytras.min_height"), config.getMinHeight())
                 .setDefaultValue(0.0)
 //                .setMin(-64.0)
 //                .setMax(320.0)
-                .setTooltip(Text.translatable("tooltip.fasterelytras.min_height"))
+                .setTooltip(Component.translatable("tooltip.fasterelytras.min_height"))
                 .setSaveConsumer(config::setMinHeight)
                 .build());
 
         // Max Height
-        settings.addEntry(entryBuilder.startDoubleField(Text.translatable("option.fasterelytras.max_height"), config.getMaxHeight())
+        settings.addEntry(entryBuilder.startDoubleField(Component.translatable("option.fasterelytras.max_height"), config.getMaxHeight())
                 .setDefaultValue(256.0)
 //                .setMin(-64.0)
 //                .setMax(320.0)
-                .setTooltip(Text.translatable("tooltip.fasterelytras.max_height"))
+                .setTooltip(Component.translatable("tooltip.fasterelytras.max_height"))
                 .setSaveConsumer(config::setMaxHeight)
                 .build());
 

@@ -2,10 +2,10 @@ package com.avicario.fasterelytras.mixin;
 
 import com.avicario.fasterelytras.config.FlightConfig;
 import com.avicario.fasterelytras.utility.MathUtil;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.FireworkRocketEntity;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public class FireworkRocketEntityMixin {
 
     @Shadow
-    private @Nullable LivingEntity shooter;
+    private @Nullable LivingEntity attachedToEntity;
 
     @Unique
     private FlightConfig configInstance = FlightConfig.getOrCreateInstance();
@@ -26,19 +26,19 @@ public class FireworkRocketEntityMixin {
             method = "tick",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/entity/LivingEntity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V",
                     ordinal = 0
             )
     )
-    private Vec3d modifyRocketBoostVelocity(Vec3d originalVelocity) {
-        if (shooter != null && shooter.isGliding()) {
-            Vec3d shooterRotation = shooter.getRotationVector();
-            Vec3d shooterVelocity = shooter.getVelocity();
+    private Vec3 modifyRocketBoostVelocity(Vec3 originalVelocity) {
+        if (attachedToEntity != null && attachedToEntity.isFallFlying()) {
+            Vec3 shooterRotation = attachedToEntity.getLookAngle();
+            Vec3 shooterVelocity = attachedToEntity.getDeltaMovement();
 
             double speedMultiplier;
 
             if (configInstance.isAltitudeDeterminesSpeed()) {
-                Vec3d positionVector = shooter.getEntityPos();
+                Vec3 positionVector = attachedToEntity.position();
                 double shooterAltitude = positionVector.y;
 
                 double minSpeed = configInstance.getMinSpeed();
@@ -46,7 +46,7 @@ public class FireworkRocketEntityMixin {
                 double curveStart = configInstance.getMinHeight();
                 double curveEnd = configInstance.getMaxHeight();
 
-                double altitudeCalculatedSpeed = MathHelper.clamp(
+                double altitudeCalculatedSpeed = Mth.clamp(
                         MathUtil.getLinealValue(curveStart, minSpeed, curveEnd, maxSpeed, shooterAltitude),
                         minSpeed,
                         maxSpeed

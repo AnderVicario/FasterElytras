@@ -6,13 +6,13 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.minecraft.server.PlayerManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
 
-import static net.minecraft.server.command.CommandManager.argument;
-import static net.minecraft.server.command.CommandManager.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
 
 public class FlightConfigCommand {
 
@@ -21,16 +21,16 @@ public class FlightConfigCommand {
             dispatcher.register(literal("fasterelytras")
                     .requires(source -> {
                         // 1. Permite la consola (útil para scripts)
-                        if (!source.isExecutedByPlayer()) {
+                        if (!source.isPlayer()) {
                             return true; // O source.hasPermissionLevel(4) para restringir
                         }
 
                         // 2. Para jugadores, verificar si es operador nivel 2+
-                        ServerPlayerEntity player = source.getPlayer();
+                        ServerPlayer player = source.getPlayer();
                         if (player == null) return false;
 
-                        PlayerManager pm = source.getServer().getPlayerManager();
-                        return pm.isOperator(player.getPlayerConfigEntry());
+                        PlayerList pm = source.getServer().getPlayerList();
+                        return pm.isOp(player.nameAndId());
                     }) // Solo ops pueden usar estos comandos
                     .then(literal("config")
                             .then(literal("show")
@@ -57,81 +57,81 @@ public class FlightConfigCommand {
         });
     }
 
-    private static int showConfig(CommandContext<ServerCommandSource> context) {
+    private static int showConfig(CommandContext<CommandSourceStack> context) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
 
-        Text configText = Text.literal("")
-                .append(Text.translatable("command.fasterelytras.config.current"))
+        Component configText = Component.literal("")
+                .append(Component.translatable("command.fasterelytras.config.current"))
                 .append("\n")
-                .append(Text.translatable("command.fasterelytras.config.altitude_determines_speed", config.isAltitudeDeterminesSpeed()))
+                .append(Component.translatable("command.fasterelytras.config.altitude_determines_speed", config.isAltitudeDeterminesSpeed()))
                 .append("\n")
-                .append(Text.translatable("command.fasterelytras.config.min_speed", config.getMinSpeed()))
+                .append(Component.translatable("command.fasterelytras.config.min_speed", config.getMinSpeed()))
                 .append("\n")
-                .append(Text.translatable("command.fasterelytras.config.max_speed", config.getMaxSpeed()))
+                .append(Component.translatable("command.fasterelytras.config.max_speed", config.getMaxSpeed()))
                 .append("\n")
-                .append(Text.translatable("command.fasterelytras.config.min_height", config.getMinHeight()))
+                .append(Component.translatable("command.fasterelytras.config.min_height", config.getMinHeight()))
                 .append("\n")
-                .append(Text.translatable("command.fasterelytras.config.max_height", config.getMaxHeight()));
+                .append(Component.translatable("command.fasterelytras.config.max_height", config.getMaxHeight()));
 
-        context.getSource().sendFeedback(() -> configText, true);
+        context.getSource().sendSuccess(() -> configText, true);
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int setAltitudeDeterminesSpeed(CommandContext<ServerCommandSource> context, boolean value) {
+    private static int setAltitudeDeterminesSpeed(CommandContext<CommandSourceStack> context, boolean value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setAltitudeDeterminesSpeed(value);
-        context.getSource().sendFeedback(() ->
-                        Text.translatable("command.fasterelytras.set.altitude_determines_speed", value),
+        context.getSource().sendSuccess(() ->
+                        Component.translatable("command.fasterelytras.set.altitude_determines_speed", value),
                 true
         );
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int setMinSpeed(CommandContext<ServerCommandSource> context, double value) {
+    private static int setMinSpeed(CommandContext<CommandSourceStack> context, double value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setMinSpeed(value);
-        context.getSource().sendFeedback(() ->
-                        Text.translatable("command.fasterelytras.set.min_speed", value),
+        context.getSource().sendSuccess(() ->
+                        Component.translatable("command.fasterelytras.set.min_speed", value),
                 true
         );
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int setMaxSpeed(CommandContext<ServerCommandSource> context, double value) {
+    private static int setMaxSpeed(CommandContext<CommandSourceStack> context, double value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setMaxSpeed(value);
-        context.getSource().sendFeedback(() ->
-                        Text.translatable("command.fasterelytras.set.max_speed", value),
+        context.getSource().sendSuccess(() ->
+                        Component.translatable("command.fasterelytras.set.max_speed", value),
                 true
         );
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int setMinHeight(CommandContext<ServerCommandSource> context, double value) {
+    private static int setMinHeight(CommandContext<CommandSourceStack> context, double value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setMinHeight(value);
-        context.getSource().sendFeedback(() ->
-                        Text.translatable("command.fasterelytras.set.min_height", value),
+        context.getSource().sendSuccess(() ->
+                        Component.translatable("command.fasterelytras.set.min_height", value),
                 true
         );
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int setMaxHeight(CommandContext<ServerCommandSource> context, double value) {
+    private static int setMaxHeight(CommandContext<CommandSourceStack> context, double value) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.setMaxHeight(value);
-        context.getSource().sendFeedback(() ->
-                        Text.translatable("command.fasterelytras.set.max_height", value),
+        context.getSource().sendSuccess(() ->
+                        Component.translatable("command.fasterelytras.set.max_height", value),
                 true
         );
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int resetConfig(CommandContext<ServerCommandSource> context) {
+    private static int resetConfig(CommandContext<CommandSourceStack> context) {
         FlightConfig config = FlightConfig.getOrCreateInstance();
         config.resetToDefaults();
-        context.getSource().sendFeedback(() ->
-                        Text.translatable("command.fasterelytras.reset"),
+        context.getSource().sendSuccess(() ->
+                        Component.translatable("command.fasterelytras.reset"),
                 true
         );
         return Command.SINGLE_SUCCESS;
