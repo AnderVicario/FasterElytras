@@ -33,7 +33,7 @@ public class FasterelytrasClient implements ClientModInitializer {
                                 Component.translatable("hud.fasterelytras.speed").getString(),
                                 formattedSpeed
                         );
-                        context.drawString(
+                        context.text(
                                 client.font,
                                 speedText,
                                 10,
