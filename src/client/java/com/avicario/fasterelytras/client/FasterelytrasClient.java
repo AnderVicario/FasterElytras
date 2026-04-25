@@ -3,11 +3,10 @@ package com.avicario.fasterelytras.client;
 import com.avicario.fasterelytras.config.FlightConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +17,9 @@ public class FasterelytrasClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         HudElementRegistry.addLast(
-                Identifier.of("fasterelytras", "hud_text"),
+                Identifier.fromNamespaceAndPath("fasterelytras", "hud_text"),
                 (context, tickCounter) -> {
-                    MinecraftClient client = MinecraftClient.getInstance();
+                    Minecraft client = Minecraft.getInstance();
                     FlightConfig config = FlightConfig.getOrCreateInstance();
 
                     // Solo mostrar si está activado en la configuración
@@ -31,12 +30,12 @@ public class FasterelytrasClient implements ClientModInitializer {
 
                         String formattedSpeed = String.format("%.2f", averageSpeed);
                         String speedText = String.format(
-                                Text.translatable("hud.fasterelytras.speed").getString(),
+                                Component.translatable("hud.fasterelytras.speed").getString(),
                                 formattedSpeed
                         );
-                        context.drawText(
-                                client.textRenderer,
-                                Text.literal(speedText),
+                        context.drawString(
+                                client.font,
+                                speedText,
                                 10,
                                 200,
                                 0xFFFFFFFF,
@@ -47,13 +46,13 @@ public class FasterelytrasClient implements ClientModInitializer {
         );
     }
 
-    private double calculatePlayerSpeed(MinecraftClient client, boolean enableVertical) {
+    private double calculatePlayerSpeed(Minecraft client, boolean enableVertical) {
         if (client.player == null) return 0.0;
 
-        Vec3d velocity = client.player.getVelocity();
+        Vec3 velocity = client.player.getDeltaMovement();
 
         if (enableVertical) {
-            if (client.player.isOnGround()){
+            if (client.player.onGround()){
                 return Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z) * 20.0;
             }
             return velocity.length() * 20.0;
