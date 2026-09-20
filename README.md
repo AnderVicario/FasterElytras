@@ -73,3 +73,12 @@ Default Values
 - Max Height: 256.0
 - Show Speedometer: false
 - Enable Vertical: false
+
+## Available Languages
+
+| Language | Code | Status | Contributor |
+| :--- | :---: | :---: | :--- |
+| 🇺🇸 English | `en_us` | 🟢 100% | @AnderVicario |
+| 🇪🇸 Spanish | `es_es` | 🟢 100% | @AnderVicario |
+| 🇵🇲 Basque | `eu_es` | 🟢 100% | @AnderVicario |
+| 🇨🇳 Simplified Chinese | `zh_cn` | 🟢 100% | @Minecraft269 |
