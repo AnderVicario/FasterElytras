@@ -36,6 +36,6 @@
     "minecraft": "${minecraft_version}"
   },
   "suggests": {
-    "modmenu": ">=17.0.0"
+    "modmenu": ">=21.0.0-beta.1"
   }
 }
